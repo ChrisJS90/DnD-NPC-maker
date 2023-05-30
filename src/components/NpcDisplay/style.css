@@ -1,0 +1,13 @@
+.npc-info {
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+}
+
+.basic-info{
+    text-align: left;
+}
+
+.details{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
