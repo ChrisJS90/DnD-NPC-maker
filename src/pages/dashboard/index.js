@@ -6,7 +6,7 @@ import NpcDisplay from "../../components/NpcDisplay/NpcDisplay";
 // test npc to get started before setting up json server
 
 const testyBoy = {
-  name: "Testy Boy",
+  name: "Testy Boy2",
   occupation: "Test dummy",
   history: "Made simply to check code is working, what a pitiful life!",
   appearance: "Piercings",
@@ -24,11 +24,21 @@ const testyBoy = {
 };
 
 const Dashboard = () => {
-  const [npcs, setNpcs] = useState({});
+  const [npcs, setNpcs] = useState([]);
   const [selectedNpc, setSelectedNpc] = useState(testyBoy);
   const navigate = useNavigate();
 
   // useEffect function to get info from .json database
+
+  useEffect(() => {
+    fetch(`http://localhost:4000/npcs`)
+    .then(res => res.json())
+    .then(data => {
+        setNpcs(...npcs, data)
+    })
+  }, [])
+
+  console.log(npcs)
 
   return (
     <div className="dash">
@@ -39,6 +49,13 @@ const Dashboard = () => {
         <div className="npc-list-sec">
           <ul className="list-of-npcs">
             {/* map function on npcs to display only their names in a list */}
+            {npcs.map(npc => {
+                return(
+                    <button onClick={() => {setSelectedNpc(npc)}}>
+                        {npc.name}
+                    </button>
+                )
+            })}
           </ul>
         </div>
       </div>

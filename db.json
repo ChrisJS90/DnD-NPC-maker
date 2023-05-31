@@ -1,0 +1,22 @@
+{
+    "npcs": [
+        {
+            "id": 1,
+            "name": "Testy Boy",
+            "occupation": "Test dummy",
+            "history": "Made simply to check code is working, what a pitiful life!",
+            "appearance": "Piercings",
+            "abilities": {
+              "high": "Strength",
+              "low": "Intelligence"
+            },
+            "talent": "Perfect memory",
+            "mannerism": "Prone to singing, whistling, or humming quietly",
+            "interactions": "Arrogant",
+            "ideals": "Beauty and change",
+            "bond": "Out for revenge",
+            "flaw": "Arrogance",
+            "usefulKnowledge": "Telling me if my code is shite or not"
+          }
+    ]
+}
