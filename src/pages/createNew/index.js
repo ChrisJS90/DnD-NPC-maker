@@ -25,7 +25,7 @@ const CreateNew = () => {
     mannerism: "",
     interactions: "",
     personality: {
-        alignment: "",
+      alignment: "",
       ideals: "",
       bond: "",
       flaw: "",
@@ -57,7 +57,7 @@ const CreateNew = () => {
     "Distinctive nose",
     "Distinctive posture",
     "Exceptionally beautiful",
-    "Exceptionally ugly",    
+    "Exceptionally ugly",
   ];
 
   const highAbilityList = [
@@ -121,7 +121,7 @@ const CreateNew = () => {
     "Paces",
     "Taps fingers",
     "Bites fingernails",
-    "Twirls hair or tugs beard"
+    "Twirls hair or tugs beard",
   ];
 
   const interactionList = [
@@ -136,12 +136,39 @@ const CreateNew = () => {
     "Irritable",
     "Ponderous",
     "Quiet",
-    "Suspicious"
+    "Suspicious",
   ];
 
-//   sort out npc ideals with alignment
+  //   sort out npc ideals with alignment
 
+  // This one is only 9 as opposed to the 10 listed in the rulebook as the rulebook
+  // has roll twice when a 10 is rolled
+  const bondList = [
+    "Dedicated to fulfilling a personal life goal",
+    "Protective of close family members",
+    "Protective of colleagues or compatriots",
+    "Loyal to a benefactor, patron, or employer",
+    "Captivated by a romantic interest",
+    "Drawn to a special place",
+    "Protective of a sentimental keepsake",
+    "Protective of a valuable possession",
+    "Out for revenge",
+  ];
 
+  const flawList = [
+    "Forbidden love or susceptibility to romance",
+    "Enjoys decadent pleasures",
+    "Arrogance",
+    "Envies another creature's possessions or station",
+    "Overpowering greed",
+    "Prone to rage",
+    "Has a powerful enemy",
+    "Specific phobia",
+    "Shameful or scandalous history",
+    "Secret crime or misdeed",
+    "Possession of forbidden lore",
+    "Foolhardy bravery",
+  ];
 
   //   Functions to roll each list
 
@@ -190,156 +217,106 @@ const CreateNew = () => {
           <label>
             What is your NPC's appearance?
             <select name="appearance">
-                {appearanceList.map(value => {
-                    return(
-                        <option value={value}>{value}</option>
-                    )
-                })}
-                <option value={rollAppearance}>Random</option>
+              {appearanceList.map((value) => {
+                return <option value={value}>{value}</option>;
+              })}
+              <option value={rollAppearance}>Random</option>
             </select>
-            <input type="text" name="appearance" placeholder="Please give details"/>
+            <input
+              type="text"
+              name="appearanceDetail"
+              placeholder="Please give details"
+            />
           </label>
         </div>
 
         <div className="detail">
           <label>
             What is your NPC's mannerism?
-            <input type="text" name="mannerism" />
+            <select name="mannerism">
+              {mannerismList.map((value) => {
+                return <option value={value}>{value}</option>;
+              })}
+            </select>
+
           </label>
         </div>
 
         <div className="detail">
           <label>
-            What is your NPC's history?
+            What are your NPC's interactions with others?
+            <select name="interactions">
+                {interactionList.map((value) => {
+                    return <option value={value}>{value}</option>
+                })}
+            </select>
+
+          </label>
+        </div>
+
+{/* Alignment goes here */}
+        <div className="detail">
+          <label>
+            What are your NPC's ideals?
             <input type="text" name="name" />
           </label>
         </div>
 
         <div className="detail">
           <label>
-            What is your NPC's history?
+            What is your NPC's bond?
             <input type="text" name="name" />
           </label>
         </div>
 
         <div className="detail">
           <label>
-            What is your NPC's history?
+            What is your NPC's flaw?
             <input type="text" name="name" />
+          </label>
+        </div>
+
+{/* Important info */}
+        <div className="detail">
+          <label>
+            What is your NPC's highest ability?
+            <select name="highAbility">
+                {highAbilityList.map((ability) => {
+                    return <option value={ability}>{ability.stat}</option>
+                })}
+            </select>
           </label>
         </div>
 
         <div className="detail">
           <label>
-            What is your NPC's history?
-            <input type="text" name="name" />
+            What is your NPC's lowest ability?
+            <select name="lowAbility">
+                {lowAbilityList.map((ability) => {
+                    return <option value={ability}>{ability.stat}</option>
+                })}
+            </select>
           </label>
         </div>
 
         <div className="detail">
           <label>
-            What is your NPC's history?
-            <input type="text" name="name" />
+            What is your NPC's talent?
+            <select name="talent">
+                {talentList.map((talent) => {
+                    return <option value={talent}>{talent}</option>
+                })}
+            </select>
           </label>
         </div>
 
         <div className="detail">
           <label>
-            What is your NPC's history?
-            <input type="text" name="name" />
+            What useful knowledge does your NPC have?
+            <textarea name="knowledge"></textarea>
           </label>
         </div>
-
-        <div className="detail">
-          <label>
-            What is your NPC's history?
-            <input type="text" name="name" />
-          </label>
-        </div>
-
-        <div className="detail">
-          <label>
-            What is your NPC's history?
-            <input type="text" name="name" />
-          </label>
-        </div>
-
-        <div className="detail">
-          <label>
-            What is your NPC's history?
-            <input type="text" name="name" />
-          </label>
-        </div>
-
-        <div className="detail">
-          <label>
-            What is your NPC's history?
-            <input type="text" name="name" />
-          </label>
-        </div>
-
-        <div className="detail">
-          <label>
-            What is your NPC's history?
-            <input type="text" name="name" />
-          </label>
-        </div>
-
-        <div className="detail">
-          <label>
-            What is your NPC's history?
-            <input type="text" name="name" />
-          </label>
-        </div>
-
-        <div className="detail">
-          <label>
-            What is your NPC's history?
-            <input type="text" name="name" />
-          </label>
-        </div>
-
-        <div className="detail">
-          <label>
-            What is your NPC's history?
-            <input type="text" name="name" />
-          </label>
-        </div>
-
-        <div className="detail">
-          <label>
-            What is your NPC's history?
-            <input type="text" name="name" />
-          </label>
-        </div>
-
-        <div className="detail">
-          <label>
-            What is your NPC's history?
-            <input type="text" name="name" />
-          </label>
-        </div>
-
-        <div className="detail">
-          <label>
-            What is your NPC's history?
-            <input type="text" name="name" />
-          </label>
-        </div>
-
-        <div className="detail">
-          <label>
-            What is your NPC's history?
-            <input type="text" name="name" />
-          </label>
-        </div>
-
-        <div className="detail">
-          <label>
-            What is your NPC's history?
-            <input type="text" name="name" />
-          </label>
-        </div>
+        
       </form>
     </div>
   );
