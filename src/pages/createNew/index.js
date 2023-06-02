@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
 
 const CreateNew = () => {
@@ -12,14 +13,8 @@ const CreateNew = () => {
       detail: "",
     },
     abilities: {
-      high: {
-        stat: "",
-        detail: "",
-      },
-      low: {
-        stat: "",
-        detail: "",
-      },
+      high: "",
+      low: "",
     },
     talent: "",
     mannerism: "",
@@ -34,6 +29,7 @@ const CreateNew = () => {
   };
 
   const [newNpc, setNewNpc] = useState(emptyNpc);
+  const navigate = useNavigate()
 
   //   Roll tables for details
 
@@ -61,21 +57,21 @@ const CreateNew = () => {
   ];
 
   const highAbilityList = [
-    { id: 1, stat: "Strength", desc: "powerful, brawny, strong as an ox" },
-    { id: 2, stat: "Dexterity", desc: "lithe, agile, graceful" },
-    { id: 3, stat: "Constitution", desc: "hardy, hale, healthy" },
-    { id: 4, stat: "Intelligence", desc: "studious, learned, inquisitive" },
-    { id: 5, stat: "Wisdom", desc: "perceptive, spiritual, insightful" },
-    { id: 6, stat: "Charisma", desc: "persuasive, forceful, born leader" },
+    "Strength - powerful, brawny, strong as an ox",
+    "Dexterity -lithe, agile, graceful",
+    "Constitution - hardy, hale, healthy",
+    "Intelligence - studious, learned, inquisitive",
+    "Wisdom - perceptive, spiritual, insightful",
+    "Charisma - persuasive, forceful, born leader",
   ];
 
   const lowAbilityList = [
-    { stat: "Strength", desc: "feeble, scrawny" },
-    { stat: "Dexterity", desc: "clumsy, fumbling" },
-    { stat: "Constitution", desc: "sickly, pale" },
-    { stat: "Intelligence", desc: "dim-witted, slow" },
-    { stat: "Wisdom", desc: "oblivious, absentminded" },
-    { stat: "Charisma", desc: "dull, boring" },
+    "Strength - feeble, scrawny",
+    "Dexterity - clumsy, fumbling",
+    "Constitution - sickly, pale",
+    "Intelligence - dim-witted, slow",
+    "Wisdom - oblivious, absentminded",
+    "Charisma - dull, boring",
   ];
 
   const talentList = [
@@ -140,6 +136,18 @@ const CreateNew = () => {
   ];
 
   //   sort out npc ideals with alignment
+
+  const alignmentList = [
+    "Lawful Good",
+    "Neutral Good",
+    "Chaotic Good",
+    "Lawful Neutral",
+    "True Neutral",
+    "Chaotic Neutral",
+    "Lawful Evil",
+    "Neutral Evil",
+    "Chaotic Evil",
+  ];
 
   const goodIdeals = [
     "Beauty",
@@ -226,15 +234,6 @@ const CreateNew = () => {
     return appearanceList[val];
   }
 
-  function rollAbilities() {
-    let valH = randomInt(6);
-    let valL = randomInt(6);
-    while (valH === valL) {
-      valL = randomInt(6);
-    }
-    return [highAbilityList[valH], lowAbilityList[valL]];
-  }
-
   //   Handle functions
 
   function handleChange(event) {
@@ -289,21 +288,24 @@ const CreateNew = () => {
         setNewNpc({ ...newNpc, interactions: inputValue });
       }
     } else if (inputName === "alignment") {
-      setNewNpc((prevState) => ({
-        ...prevState,
-        personality: {
-          ...prevState.personality,
-          alignment: inputValue,
-        },
-      }));
-    } else if (inputName === "alignment2") {
-      setNewNpc((prevState) => ({
-        ...prevState,
-        personality: {
-          ...prevState.personality,
-          alignment: [...prevState, inputValue],
-        },
-      }));
+      if (inputValue === "Random") {
+        const randAlign = alignmentList[randomInt(9)];
+        setNewNpc((prevState) => ({
+          ...prevState,
+          personality: {
+            ...prevState.personality,
+            alignment: randAlign,
+          },
+        }));
+      } else {
+        setNewNpc((prevState) => ({
+          ...prevState,
+          personality: {
+            ...prevState.personality,
+            alignment: inputValue,
+          },
+        }));
+      }
     } else if (inputName === "ideals") {
       setNewNpc((prevState) => ({
         ...prevState,
@@ -314,7 +316,7 @@ const CreateNew = () => {
       }));
     } else if (inputName === "bond") {
       if (inputValue === "Random") {
-        const randBond = bondList[randomInt(10)];
+        const randBond = bondList[randomInt(9)];
         setNewNpc((prevState) => ({
           ...prevState,
           personality: {
@@ -332,56 +334,89 @@ const CreateNew = () => {
         }));
       }
     } else if (inputName === "flaw") {
-        if (inputValue === "Random") {
-            const randFlaw = flawList[randomInt(12)];
-            setNewNpc((prevState) => ({
-                ...prevState,
-                personality: {
-                  ...prevState.personality,
-                  flaw: randFlaw,
-                },
-              }))
-        } else {
-      setNewNpc((prevState) => ({
-        ...prevState,
-        personality: {
-          ...prevState.personality,
-          flaw: inputValue,
-        },
-      }))};
+      if (inputValue === "Random") {
+        const randFlaw = flawList[randomInt(12)];
+        setNewNpc((prevState) => ({
+          ...prevState,
+          personality: {
+            ...prevState.personality,
+            flaw: randFlaw,
+          },
+        }));
+      } else {
+        setNewNpc((prevState) => ({
+          ...prevState,
+          personality: {
+            ...prevState.personality,
+            flaw: inputValue,
+          },
+        }));
+      }
     } else if (inputName === "highAbility") {
-      setNewNpc((prevState) => ({
-        ...prevState,
-        abilities: {
-          ...prevState.abilities,
-          high: {
-            stat: inputValue,
-            detail: inputValue.desc,
+      if (inputValue === "Random") {
+        const randHAbil = highAbilityList[randomInt(6)];
+        setNewNpc((prevState) => ({
+          ...prevState,
+          abilities: {
+            ...prevState.abilities,
+            high: randHAbil,
           },
-        },
-      }));
+        }));
+      } else {
+        setNewNpc((prevState) => ({
+          ...prevState,
+          abilities: {
+            ...prevState.abilities,
+            high: inputValue,
+          },
+        }));
+      }
     } else if (inputName === "lowAbility") {
-      setNewNpc((prevState) => ({
-        ...prevState,
-        abilities: {
-          ...prevState.abilities,
-          low: {
-            ...prevState,
-            stat: inputValue.stat,
-            detail: inputValue.desc,
+      if (inputValue === "Random") {
+        const randLAbil = lowAbilityList[randomInt(6)];
+        setNewNpc((prevState) => ({
+          ...prevState,
+          abilities: {
+            ...prevState.abilities,
+            low: randLAbil,
           },
-        },
-      }));
+        }));
+      } else {
+        setNewNpc((prevState) => ({
+          ...prevState,
+          abilities: {
+            ...prevState.abilities,
+            low: inputValue,
+          },
+        }));
+      }
     } else if (inputName === "talent") {
-      setNewNpc({ ...newNpc, talent: inputValue });
+      if (inputValue === "Random") {
+        const randTalent = talentList[randomInt(20)];
+        setNewNpc({ ...newNpc, talent: randTalent });
+      } else {
+        setNewNpc({ ...newNpc, talent: inputValue });
+      }
     } else if (inputName === "knowledge") {
       setNewNpc({ ...newNpc, usefulKnowledge: inputValue });
     }
   }
 
+ function handleSubmit(event) {
+    event.preventDefault();
+
+    fetch(`http://localhost:4000/npcs`, {
+        method: "POST",
+        body: JSON.stringify(newNpc),
+        headers: {'Content-Type': "application/json"}
+ })
+
+  }
+
   return (
     <div className="create">
-      <form>
+        <button onClick={() => navigate("/")}>Go home</button>
+      <form onSubmit={handleSubmit}>
         <div className="detail">
           <label>
             What is your NPC's name?
@@ -456,16 +491,13 @@ const CreateNew = () => {
         <div className="detail">
           <label>
             What is your NPC's alignment?
-            <select name="alignment">
-              <option value={"Lawful"}>Lawful</option>
-              <option value={"Neutral"}>Neutral</option>
-              <option value={"Chaotic"}>Evil</option>
+            <select name="alignment" onChange={handleChange}>
+              {alignmentList.map((alignment) => {
+                return <option value={alignment}>{alignment}</option>;
+              })}
+              <option value={"Random"}>Random</option>
             </select>
-            <select name="alignment2">
-              <option value={"Good"}>Good</option>
-              <option value={"Neutral"}>Neutral</option>
-              <option value={"Evil"}>Evil</option>
-            </select>
+            <p>{`Current aligment: ${newNpc.personality.alignment}`}</p>
           </label>
         </div>
 
@@ -499,7 +531,6 @@ const CreateNew = () => {
               <option value={"Random"}>Random</option>
             </select>
             <p>{`Current flaw: ${newNpc.personality.flaw}`}</p>
-
           </label>
         </div>
 
@@ -509,12 +540,11 @@ const CreateNew = () => {
             What is your NPC's highest ability?
             <select name="highAbility" onChange={handleChange}>
               {highAbilityList.map((ability) => {
-                return <option value={ability.id}>{ability.stat}</option>;
+                return <option value={ability}>{ability}</option>;
               })}
               <option value={"Random"}>Random</option>
             </select>
-            <p>{`Current high ability: ${newNpc.abilities.high.stat} - ${newNpc.abilities.high.detail}`}</p>
-
+            <p>{`Current high ability: ${newNpc.abilities.high}`}</p>
           </label>
         </div>
 
@@ -523,21 +553,24 @@ const CreateNew = () => {
             What is your NPC's lowest ability?
             <select name="lowAbility" onChange={handleChange}>
               {lowAbilityList.map((ability) => {
-                return <option value={ability}>{ability.stat}</option>;
+                return <option value={ability}>{ability}</option>;
               })}
               <option value={"Random"}>Random</option>
             </select>
+            <p>{`Current low ability: ${newNpc.abilities.low}`}</p>
           </label>
         </div>
 
         <div className="detail">
           <label>
             What is your NPC's talent?
-            <select name="talent">
+            <select name="talent" onChange={handleChange}>
               {talentList.map((talent) => {
                 return <option value={talent}>{talent}</option>;
               })}
+              <option value={"Random"}>Random</option>
             </select>
+            <p>{`Current talent: ${newNpc.talent}`}</p>
           </label>
         </div>
 
@@ -547,6 +580,7 @@ const CreateNew = () => {
             <textarea name="knowledge"></textarea>
           </label>
         </div>
+        <input type="submit" value="submit" />
       </form>
     </div>
   );

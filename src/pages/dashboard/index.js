@@ -6,10 +6,11 @@ import NpcDisplay from "../../components/NpcDisplay/NpcDisplay";
 // test npc to get started before setting up json server
 
 const testyBoy = {
-  name: "Testy Boy2",
+  id: 1,
+  name: "Testy Boy mirror",
   occupation: "Test dummy",
   history: "Made simply to check code is working, what a pitiful life!",
-  appearance: "Piercings",
+  appearance: { trait: "Piercings", detail: "Nose ring" },
   abilities: {
     high: "Strength",
     low: "Intelligence",
@@ -17,10 +18,13 @@ const testyBoy = {
   talent: "Perfect memory",
   mannerism: "Prone to singing, whistling, or humming quietly",
   interactions: "Arrogant",
-  ideals: "Beauty and change",
-  bond: "Out for revenge",
-  flaw: "Arrogance",
-  usefulKnowledge: "Telling me if my code is shite or not",
+  personality: {
+    alignment: "Lawful Good",
+    ideals: "Beauty and change",
+    bond: "Out for revenge",
+    flaw: "Arrogance",
+  },
+  usefulKnowledge: "Telling me if my code is working",
 };
 
 const Dashboard = () => {
@@ -32,29 +36,37 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetch(`http://localhost:4000/npcs`)
-    .then(res => res.json())
-    .then(data => {
-        setNpcs(...npcs, data)
-    })
-  }, [])
+      .then((res) => res.json())
+      .then((data) => {
+        setNpcs(...npcs, data);
+      });
+  }, []);
 
-  console.log(npcs)
+  console.log(npcs);
 
   return (
     <div className="dash">
       <div className="sidebar">
         <div className="create-npc-sec">
-          <button onClick={() => navigate("/create-new")}>Create New NPC</button>
+          <button onClick={() => navigate("/create-new")}>
+            Create New NPC
+          </button>
         </div>
         <div className="npc-list-sec">
           <ul className="list-of-npcs">
             {/* map function on npcs to display only their names in a list */}
-            {npcs.map(npc => {
-                return(
-                    <button onClick={() => {setSelectedNpc(npc)}}>
-                        {npc.name}
-                    </button>
-                )
+            {npcs.map((npc) => {
+              return (
+                <li>
+                  <button
+                    onClick={() => {
+                      setSelectedNpc(npc);
+                    }}
+                  >
+                    {npc.name}
+                  </button>
+                </li>
+              );
             })}
           </ul>
         </div>

@@ -1,22 +1,52 @@
 {
-    "npcs": [
-        {
-            "id": 1,
-            "name": "Testy Boy",
-            "occupation": "Test dummy",
-            "history": "Made simply to check code is working, what a pitiful life!",
-            "appearance": "Piercings",
-            "abilities": {
-              "high": "Strength",
-              "low": "Intelligence"
-            },
-            "talent": "Perfect memory",
-            "mannerism": "Prone to singing, whistling, or humming quietly",
-            "interactions": "Arrogant",
-            "ideals": "Beauty and change",
-            "bond": "Out for revenge",
-            "flaw": "Arrogance",
-            "usefulKnowledge": "Telling me if my code is shite or not"
-          }
-    ]
+  "npcs": [
+    {
+      "id": 1,
+      "name": "Testy Boy",
+      "occupation": "Test dummy",
+      "history": "Made simply to check code is working, what a pitiful life!",
+      "appearance": {
+        "trait": "Piercings",
+        "detail": "Nose ring"
+      },
+      "abilities": {
+        "high": "Strength",
+        "low": "Intelligence"
+      },
+      "talent": "Perfect memory",
+      "mannerism": "Prone to singing, whistling, or humming quietly",
+      "interactions": "Arrogant",
+      "personality": {
+        "alignment": "Lawful Good",
+        "ideals": "Beauty and change",
+        "bond": "Out for revenge",
+        "flaw": "Arrogance"
+      },
+      "usefulKnowledge": "Telling me if my code is shite or not"
+    },    
+    {
+      "id": 2,
+      "name": "test one",
+      "occupation": "tester",
+      "history": "created to test the submit",
+      "appearance": {
+        "trait": "Braided beard or hair",
+        "detail": "brown hair"
+      },
+      "abilities": {
+        "high": "Constitution - hardy, hale, healthy",
+        "low": "Wisdom - oblivious, absentminded"
+      },
+      "talent": "Perfect memory",
+      "mannerism": "Uses flowery speech or long words",
+      "interactions": "Honest",
+      "personality": {
+        "alignment": "Neutral Good",
+        "ideals": "",
+        "bond": "Captivated by a romantic interest",
+        "flaw": "Forbidden love or susceptibility to romance"
+      },
+      "usefulKnowledge": ""
+    }
+  ]
 }
